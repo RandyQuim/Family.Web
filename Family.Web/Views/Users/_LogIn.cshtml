@@ -1,0 +1,55 @@
+﻿@model Family.Web.Models.UserDto
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Users", FormMethod.Post))
+{
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: blue">
+                <h3>Login</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h5>Username:</h5>
+                    <input type="text" placeholder="Enter username here" class="form-control" id="username" name="text"/>
+                </div>
+                <div class="form-group">
+                    <h5>Password:</h5>
+                    <input type="password" placeholder="Enter password here" class="form-control" id="password" name="text"/>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color: lime">
+                <button type="button" class="btn btn-primary" id="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $('#submit').click(function () {
+        var credentials = { 'Username': $('#username').val(), 'Password': $('#password').val() };
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LogIn", "Users")',
+            data: JSON.stringify(credentials),
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                if (response === "Invalid username or password") {
+                    alert(response);
+                } else {
+                    $('#modalLink').text("Logout");
+                    alert('Welcome ' + response);
+                    location.reload(true);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert("ERROR processing the request"); 
+            }
+        });
+        $('#loginModal').modal('hide');
+    });
+</script>

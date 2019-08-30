@@ -1,0 +1,34 @@
+﻿@model Family.Web.Models.User_Phy
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User_Phy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Physiology.PhyId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Physiology.PhyId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserPhyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

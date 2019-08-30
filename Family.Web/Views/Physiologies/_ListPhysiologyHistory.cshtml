@@ -1,0 +1,62 @@
+﻿@using Family.Web.Models
+@model IEnumerable<Family.Web.Models.PhysiologyDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<hr />
+<div class="container" style="padding-left: 0px; padding-right:30px">
+    <table class="table table-bordered table-striped table-hover table-sortable table-filterable">
+        <thead id="tableHeader">
+            <tr>
+                <th id="dateHeader">
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Height)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weight)
+                </th>
+                <th style="width: 150px">
+                    @Html.DisplayNameFor(model => model.IsLosing)
+                </th>
+                <th colspan="3" id="headerBtn">
+                    @Html.ActionLink("Create New", "Create", new { userId = ViewBag.UserId, page = ViewBag.Page }, new { @class = "btn btn-primary", id = "primaryBtn" })
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="overflow: hidden">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td style="overflow: hidden">
+                        @Html.DisplayFor(modelItem => item.Feet)'
+                        @Html.DisplayFor(modelItem => item.Inches)"
+                    </td>
+                    <td style="overflow: hidden">
+                        @Html.DisplayFor(modelItem => item.Weight) lbs
+                    </td>
+                    <td style="overflow: hidden">
+                        @Html.YesNo(item.IsLosing.GetValueOrDefault())
+                    </td>
+                    <td align="center">
+                        <a id="iconTool" data-toggle="tooltip" title="Edit" href="@Url.Action("Edit", "Physiologies" , new { id = item.PhyId, page = item.Page, readOnly=false})"><i class='far fa-edit'></i></a>
+                    </td>
+                    <td align="center">
+                        <a id="iconTool" data-toggle="tooltip" title="Delete" href="@Url.Action("Delete", "Physiologies", new {id = item.PhyId, page = item.Page, readOnly = false})"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                    <td align="center">
+                        <a id="iconTool" data-toggle="tooltip" title="Details" href="@Url.Action("Details", "Physiologies" , new { id = item.PhyId, page = item.Page, readOnly=false})"><i class="fas fa-info-circle"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="https://kit.fontawesome.com/5e0f00567c.js"></script>

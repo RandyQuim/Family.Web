@@ -1,0 +1,54 @@
+﻿@model List<Family.Web.Models.Image>
+@using Family.Web.Models
+
+<div>
+    <hr />
+    <div class="row">
+        @{
+            foreach (var item in Model)
+            {
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayName(item.Title)
+                    </dt>
+
+                    <dd>
+                        @Html.Display(item.Title)
+                    </dd>
+
+                    <dd>
+                        <img src="@Url.Content(item.ImagePath)" style="width: 275px; height: auto;" />
+                    </dd>
+
+                    @{ if (item.Comment != null)
+                        {
+                            <dd>
+                                @Html.TextArea("imageComment", item.Comment, new { @class = "form-control", readOnly = true })
+                            </dd>
+                        }
+                    }
+
+                    @{ if (Principal.Identity != null && Principal.Identity.Permission != null)
+                        {
+
+                            if (Principal.Identity.Permission == "Administrator" || (Principal.Identity.Permission == "LPage" && item.Page == "LaurensPage")
+                                    || (Principal.Identity.Permission == "JPage" && item.Page == "JadensPage") || (Principal.Identity.Permission == "NPage" &&
+                                    item.Page == "NannysPage") || (Principal.Identity.Permission == "PPage" && item.Page == "PawsPage") || (Principal.Identity.Permission
+                                    == "TPage" && item.Page == "TarasPage") || (Principal.Identity.Permission == "CPage" && item.Page == "GrandmasPage") ||
+                                    (Principal.Identity.Permission == "RPage" && item.Page == "GrandpasPage"))
+                            {
+                                <dd>
+                                    <a id="imageIconTool" data-toggle="tooltip" title="Edit" href="@Url.Action("Edit", "Images", new { imageId = item.ImageId, page = item.Page, readOnly = false })"><i class='far fa-edit'></i></a>
+                                    &nbsp;
+                                    <a id="imageIconTool" data-toggle="tooltip" title="Delete" href="@Url.Action("Delete", "Images", new { imageId = item.ImageId, page = item.Page, readOnly = false })"><i class="far fa-trash-alt"></i></a>
+                                </dd>
+                            }
+                        }
+                    }
+                </dl>
+                <p>&nbsp;&nbsp;&nbsp;</p>
+
+            }
+        }
+    </div>
+</div>

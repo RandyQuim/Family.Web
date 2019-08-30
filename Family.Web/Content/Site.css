@@ -1,0 +1,93 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color:honeydew; 
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#headerLabel {
+    font-Weight: bold;
+}
+
+#tableHeader {
+    background-color:lime;
+    /*color: whitesmoke;*/
+}
+
+#iconTool {
+    color:darkblue;
+}
+
+#imageIconTool {
+    color: darkblue;
+}
+
+#primaryBtn {
+    width: auto;
+    border-color: white;
+}
+
+#headerBtn {
+    text-align: center;
+}
+
+#dateHeader {
+    width: 300px;
+}
+
+#hourLabel {
+    visibility: hidden;
+}
+
+#minuteLabel {
+    visibility: hidden;
+}
+
+#secondLabel {
+    visibility: hidden;
+}
+
+#ageLabel {
+    visibility: hidden;
+}
+
+#lead {
+    font-weight:inherit;
+}
+
+#learnMoreBtn {
+    background-color: lime;
+    color: black;
+}
+
+#addImage {
+    text-align: right;
+    margin-right: 100px;
+}
+
+#addImageDialog {
+    background-color: honeydew;
+}
+
+#addImageHeader{
+    background-color: lime;
+}

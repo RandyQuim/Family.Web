@@ -1,0 +1,65 @@
+﻿@using Family.Web.Models
+@model IEnumerable<Family.Web.Models.PhysiologyDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Physiologies</h2>
+@{
+    if (Principal.Identity.Permission == "Administrator")
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Height)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsLosing)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Height)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsLosing)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {id = item.PhyId}) |
+                        @Html.ActionLink("Details", "Details", new {id = item.PhyId}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.PhyId})
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <h2 style="color: red">Unauthorized!</h2>
+    }
+
+}

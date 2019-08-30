@@ -1,0 +1,23 @@
+﻿@using Family.Web.Models
+@{
+    ViewBag.Title = "Home Page";
+}
+<br/>
+<div class="jumbotron" style="background-color:blue">
+    <h1>Welcome!</h1>
+    <p id="lead" class="lead">This is a website dedicated to the growing Quimby, Holland, and Rawls family.</p>
+    <p>Enjoy and explore!</p>
+    @Html.ActionLink("Learn More >>",  "LearnMore", "Home", null,  new { @class="btn btn-primary btn-lg", id="learnMoreBtn"})
+</div>
+
+@{
+    if (Principal.Identity != null && Principal.Identity.Permission == "Administrator")
+    {
+        <h3 id="adminHeader">Administrative Functions:</h3>
+        <ul>
+            <li>@Html.ActionLink("All Users", "Index", "Users") </li>
+            <li>@Html.ActionLink("All Physiology Records", "Index", "Physiologies") </li>
+            <li>@Html.ActionLink("User_Phy (for technical changes)", "Index", "User_Phy") </li>
+        </ul>
+    }
+}

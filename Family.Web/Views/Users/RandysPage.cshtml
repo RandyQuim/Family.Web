@@ -1,0 +1,51 @@
+﻿@using Family.Web.Models
+@model Family.Web.Models.UserDto
+
+@{
+    ViewBag.Title = "RandysPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<h2>Randy Quimby's Page!</h2>
+
+@{ if (Principal.Identity != null && Principal.Identity.Permission != null)
+    {
+        if (Principal.Identity.Permission == "Administrator")
+        {
+            <div onclick="modalPopUp()" id="addImage">
+                <i id="iconTool" data-toggle="tooltip" title="Add Images" class="far fa-images">&nbsp;Add Images</i>
+            </div>
+        }
+    }
+}
+
+<div class="modal fade" id="addImageModal" role="dialog" data-url='@Url.Action("Add", "Images", new { page = "RandysPage" })'></div>
+
+<div id="images">@{ Html.RenderAction("ImageView", "Images", new { page = "RandysPage" }); }</div>
+
+@{
+    if (Principal.Identity != null && Principal.Identity.Permission != null)
+    {
+        if (Principal.Identity.Permission == "Administrator")
+        {
+            <div id="phyHistory">@{ Html.RenderAction("ListPhysiologyHistory", "Physiologies", new { page = "RandysPage" }); }</div>
+        }
+
+        <div class=" row>">
+            <label id="hourLabel">@Model.Time.Hours</label>
+            <label id="minuteLabel">@Model.Time.Minutes</label>
+            <label id="secondLabel">@Model.Time.Seconds</label>
+            <label id="ageLabel">@Model.Age</label>
+        </div>
+    }
+}
+
+<div>
+    <label id="time1"></label>
+</div>
+
+<script src="~/Scripts/userpage_functions.js"></script>
+<script src="https://kit.fontawesome.com/5e0f00567c.js"></script>
+

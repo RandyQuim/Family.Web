@@ -1,0 +1,126 @@
+﻿@using System.Web.Mvc.Html
+@using Family.Web.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="align-content-center">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lime">
+        <a class="navbar-brand" style="color: black" href="/Home/Index"><strong>Growing Family</strong></a>
+
+        @*Positioning the button as the second item in the HTML will have it in front of the toggler i.e. 
+            it will appear on the left side of the toggler on small screens. The ml-auto class (margin-left:auto) 
+            will push the button to the right and mr-3 give it 3 units of right margin while order-lg-last will 
+            re-order it as the last item on screens that are large (lg) or larger.*@
+        <button type="button" class="btn btn-link ml-auto mr-3 order-lg-last" id="modalLink"></button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" style="color: black" href="/Home/Index">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="/Home/About">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="/Home/Contact">Contact_Us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: black" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Family Members
+                    </a>
+                    <div class="dropdown-menu" style="background-color: black" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" style="color: orange" href="/Users/GetUserPage/?page=RandysPage">Randy</a>
+                        <a class="dropdown-item" style="color: deeppink" href="/Users/GetUserPage/?page=BilliesPage">Billie</a>
+                        <a class="dropdown-item" id="LPage" style="color: mediumspringgreen" href="/Users/GetUserPage/?page=LaurensPage">Lauren</a>
+                        <a class="dropdown-item" style="color: red" href="/Users/GetUserPage/?page=JadensPage">Jaden</a>
+                        <a class="dropdown-item" style="color:darksalmon" href="/Users/GetUserPage/?page=TarasPage">Tara</a>
+                        <a class="dropdown-item" style="color: deepskyblue" href="/Users/GetUserPage/?page=PawsPage">Paw-Paw</a>
+                        <a class="dropdown-item" style="color: magenta" href="/Users/GetUserPage/?page=NannysPage">Nanny</a>
+                        <a class="dropdown-item" style="color:chocolate" href="/Users/GetUserPage/?page=GrandmasPage">Grandma</a>
+                        <a class="dropdown-item" style="color: bisque" href="/Users/GetUserPage/?page=GrandpasPage">Grandpa</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="modal fade" id="loginModal" role="dialog" data-url='@Url.Action("Login", "Users")'></div>
+
+    </nav>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <div class="row">
+        <footer>
+            <label id="welcome" style="text-align: right;">Welcome @Html.GetName()</label>
+            <p>&copy; @DateTime.Now.Year - Growing Family</p>
+        </footer>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        @{
+            if (Principal.Identity == null)
+            {
+                Principal.Identity = new UserDto();
+            }
+
+            if (Principal.Identity.Permission == null)
+            {
+                <text>
+                    $('#modalLink').text('Login');
+                </text>
+            }
+            else
+            {
+                <text>
+                    $('#modalLink').text('Logout');
+                </text>
+            }
+        }
+        $('#modalLink').click(function () {
+            if ($('#modalLink').text() === 'Login')
+            {
+                var url = $('#loginModal').data('url');
+                $.get(url,
+                    function(data) {
+                        $('#loginModal').html(data);
+                        $('#loginModal').modal('show');
+                    });
+            }
+            else
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Logout", "Users", new { })',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        location.reload(true);
+                        alert(response + " is no longer logged in");
+                    }
+                });
+
+                $('#modalLink').text('Login');
+            }
+        });
+    });
+</script>

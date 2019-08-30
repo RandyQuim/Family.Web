@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37acee2d00324bbf8790390b47a939c5" Name="Diagram1">
+        <EntityTypeShape EntityType="Family.WebModel.User" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Family.WebModel.database_firewall_rules" Width="1.5" PointX="9.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Family.WebModel.Physiology" Width="1.5" PointX="6" PointY="0.5" />
+        <EntityTypeShape EntityType="Family.WebModel.User_Phy" Width="1.5" PointX="3.375" PointY="0.5" />
+        <AssociationConnector Association="Family.WebModel.FK_User_Phy_Physiology" />
+        <AssociationConnector Association="Family.WebModel.FK_User_Phy_Users" />
+        <EntityTypeShape EntityType="Family.WebModel.Image" Width="1.5" PointX="3.625" PointY="3" />
+        <AssociationConnector Association="Family.WebModel.FK_Users_Images" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

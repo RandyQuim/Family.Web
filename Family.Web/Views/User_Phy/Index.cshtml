@@ -1,0 +1,50 @@
+﻿@using Family.Web.Models
+@model IEnumerable<Family.Web.Models.User_Phy>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>User Physiology</h2>
+@{
+    if (Principal.Identity.Permission == "Administrator")
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Physiology.PhyId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Name)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Physiology.PhyId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserPhyId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.UserPhyId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.UserPhyId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+    else
+    {
+        <h2 style="color: red">Unauthorized!</h2>
+    }
+}

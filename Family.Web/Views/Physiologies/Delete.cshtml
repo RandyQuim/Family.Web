@@ -1,0 +1,81 @@
+﻿@model Family.Web.Models.PhysiologyDto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feet)'
+            @Html.DisplayFor(model => model.Inches)"
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight) lbs
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeSnapshot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgeSnapshot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsLosing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsLosing)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.PhyId)
+        @Html.HiddenFor(model => model.Page)
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-primary" /> |
+        @{ if (Model.Page == null)
+            {
+                @Html.ActionLink("Back to List", "Index", "Physiologies");
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "GetUserPage", "Users", new { page = Model.Page }, null);
+            }
+        }
+    </div>
+    }
+</div>

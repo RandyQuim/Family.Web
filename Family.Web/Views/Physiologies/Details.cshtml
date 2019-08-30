@@ -1,0 +1,76 @@
+﻿@using Family.Web.Models
+@model Family.Web.Models.PhysiologyDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Physiology</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feet)'
+            @Html.DisplayFor(model => model.Inches)"
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight) lbs
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeSnapshot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgeSnapshot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsLosing)
+        </dt>
+
+        <dd>
+            @Html.YesNo(Model.IsLosing.GetValueOrDefault())
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PhyId, page = Model.Page }) |
+    @{ if (Model.Page == null)
+        {
+            @Html.ActionLink("Back to List", "Index", "Physiologies");
+        }
+        else
+        {
+            @Html.ActionLink("Back to List", "GetUserPage", "Users", new { page = Model.Page }, null);
+        } 
+     }
+</p>
